@@ -1,16 +1,21 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/categorias', function(){
+    $cats = DB::table('categorias')->get();
+    foreach($cats as $c){
+        echo "id: " . $c->id . "; ";
+        echo "nome: " . $c->nome . "<br>";
+    }
+    echo "<hr>";
+
+    $nomes = DB::table('categorias')->pluck('nome');
+    foreach($nomes as $nome){
+        echo "$nome <br>";
+    }
 });
