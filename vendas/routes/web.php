@@ -18,4 +18,58 @@ Route::get('/categorias', function(){
     foreach($nomes as $nome){
         echo "$nome <br>";
     }
+    echo "<hr>";
+
+    $cats = DB::table('categorias')->where('id', 1)->get();
+    foreach($cats as $c){
+        echo "id: " . $c->id . "; ";
+        echo "nome: " . $c->nome . "<br>";
+    }
+    echo "<hr>";
+
+    $cats = DB::table('categorias')->where('id', 1)->first();
+    echo "id: " . $cats->id . "; ";
+    echo "nome: " . $cats->nome . "<br>";
+
+    echo "<p>retorna um array utilizando like</p>";
+    $cats = DB::table('categorias')->where('nome', 'like', '%p%')->get();
+    foreach($cats as $c){
+        echo "id: " . $c->id . "; ";
+        echo "nome: " . $c->nome . "<br>";
+    }
+
+    echo "<p>sentenças lógicas</p>";
+    $cats = DB::table('categorias')->where('id', 1)->orWhere('id', 2)->get();
+    foreach($cats as $c){
+        echo "id: " . $c->id . "; ";
+        echo "nome: " . $c->nome . "<br>";
+    }
+
+    echo "<p>intervalos</p>";
+    $cats = DB::table('categorias')->whereBetween('id', [1,2])->get();
+    foreach($cats as $c){
+        echo "id: " . $c->id . "; ";
+        echo "nome: " . $c->nome . "<br>";
+    }
+
+    echo "<p>intervalos (negação)</p>";
+    $cats = DB::table('categorias')->whereNotBetween('id', [1,2])->get();
+    foreach($cats as $c){
+        echo "id: " . $c->id . "; ";
+        echo "nome: " . $c->nome . "<br>";
+    }
+
+    echo "<p>conjuntos</p>";
+    $cats = DB::table('categorias')->whereIn('id', [1,3,4])->get();
+    foreach($cats as $c){
+        echo "id: " . $c->id . "; ";
+        echo "nome: " . $c->nome . "<br>";
+    }
+
+    echo "<p>conjuntos (negação)</p>";
+    $cats = DB::table('categorias')->whereNotIn('id', [1,3,4])->get();
+    foreach($cats as $c){
+        echo "id: " . $c->id . "; ";
+        echo "nome: " . $c->nome . "<br>";
+    }
 });
