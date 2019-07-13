@@ -98,3 +98,10 @@ Route::get('/categorias', function(){
         echo "nome: " . $c->nome . "<br>";
     }
 });
+
+Route::get('/novascategorias', function(){
+    $id = DB::table('categorias')->insertGetId(
+        ['nome'=>'Carros']
+    );
+    echo "Novo ID:  $id <br>";
+});
