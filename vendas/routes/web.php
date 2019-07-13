@@ -72,4 +72,29 @@ Route::get('/categorias', function(){
         echo "id: " . $c->id . "; ";
         echo "nome: " . $c->nome . "<br>";
     }
+
+
+    echo "<p>sentenças lógicas</p>";
+    $cats = DB::table('categorias')->where([
+        ['id', 1],
+        ['nome', 'roupas']
+    ])->get();
+    foreach($cats as $c){
+        echo "id: " . $c->id . "; ";
+        echo "nome: " . $c->nome . "<br>";
+    }
+
+    echo "<p>ordenando por nome</p>";
+    $cats = DB::table('categorias')->orderBy('nome')->get();
+    foreach($cats as $c){
+        echo "id: " . $c->id . "; ";
+        echo "nome: " . $c->nome . "<br>";
+    }
+
+    echo "<p>ordenando por nome (decrescente)</p>";
+    $cats = DB::table('categorias')->orderBy('nome', 'desc')->get();
+    foreach($cats as $c){
+        echo "id: " . $c->id . "; ";
+        echo "nome: " . $c->nome . "<br>";
+    }
 });
