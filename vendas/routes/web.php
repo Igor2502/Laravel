@@ -111,10 +111,31 @@ Route::get('/atualizandocategorias', function(){
     echo "<p>Antes da Atualização</p>";
     echo "id: " . $cats->id . "; ";
     echo "nome: " . $cats->nome . "<br>";
-    $cats = DB::table('categorias')->where('id', 1)
+    DB::table('categorias')->where('id', 1)
         ->update(['nome' => 'Roupas infantis']);
     $cats = DB::table('categorias')->where('id', 1)->first();
     echo "<p>Depois da Atualização</p>";
     echo "id: " . $cats->id . "; ";
     echo "nome: " . $cats->nome . "<br>";
+});
+
+Route::get('/removendocategorias', function(){
+    echo "<p>Antes da Remoção</p>";
+
+    $cats = DB::table('categorias')->get();
+    foreach($cats as $c){
+        echo "id: " . $c->id . "; ";
+        echo "nome: " . $c->nome . "<br>";
+    }
+    echo "<hr>";
+
+    //DB::table('categorias')->where('id', 1)->delete();
+    DB::table('categorias')->whereNotIn('id', [1,2,3,4,5,6])->delete();
+
+    echo "<p>Depois da Remoção</p>";
+    $cats = DB::table('categorias')->get();
+    foreach($cats as $cat){
+        echo "id: " . $cat->id . "; ";
+        echo "nome: " . $cat->nome . "<br>";
+    }
 });
