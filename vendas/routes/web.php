@@ -105,3 +105,16 @@ Route::get('/novascategorias', function(){
     );
     echo "Novo ID:  $id <br>";
 });
+
+Route::get('/atualizandocategorias', function(){
+    $cats = DB::table('categorias')->where('id', 1)->first();
+    echo "<p>Antes da Atualização</p>";
+    echo "id: " . $cats->id . "; ";
+    echo "nome: " . $cats->nome . "<br>";
+    $cats = DB::table('categorias')->where('id', 1)
+        ->update(['nome' => 'Roupas infantis']);
+    $cats = DB::table('categorias')->where('id', 1)->first();
+    echo "<p>Depois da Atualização</p>";
+    echo "id: " . $cats->id . "; ";
+    echo "nome: " . $cats->nome . "<br>";
+});
