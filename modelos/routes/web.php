@@ -1,16 +1,18 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Categoria;
 
 Route::get('/', function () {
-    return view('welcome');
+    $categorias = Categoria::all();
+    foreach($categorias as $c){
+        echo "id: " . $c->id . ", ";
+        echo "Nome: " . $c->nome . "<br>";
+    }
+});
+
+Route::get('/inserir/{nome}', function($nome) {
+    $cat = new Categoria();
+    $cat->nome = $nome;
+    $cat->save();
+    return redirect('/');
 });
