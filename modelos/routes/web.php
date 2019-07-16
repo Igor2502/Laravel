@@ -80,3 +80,15 @@ Route::get('/ids123', function() {
         echo "Nome: " . $c->nome . "<br>";
     }  
 });
+
+Route::get('/todas', function () {
+    $categorias = Categoria::withTrashed()->get();
+    foreach($categorias as $c){
+        echo "id: " . $c->id . ", ";
+        echo "Nome: " . $c->nome;
+        if($c->trashed())
+            echo ' (apagado) <br>';
+        else
+            echo '<br>';
+    }
+});
