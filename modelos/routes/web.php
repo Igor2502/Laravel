@@ -16,3 +16,15 @@ Route::get('/inserir/{nome}', function($nome) {
     $cat->save();
     return redirect('/');
 });
+
+Route::get('/categorias/{id}', function($id) {
+    $cat = Categoria::find($id);//findOrFail
+    if(isset($cat)){
+        echo "id: " . $cat->id . ", ";
+        echo "Nome: " . $cat->nome . "<br>";
+    }
+    else {
+        echo "<h1>Categoria não encontrada</h1>";
+    }
+    
+});
