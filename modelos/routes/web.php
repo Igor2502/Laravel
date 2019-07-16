@@ -25,6 +25,28 @@ Route::get('/categorias/{id}', function($id) {
     }
     else {
         echo "<h1>Categoria não encontrada</h1>";
+    }    
+});
+
+Route::get('/atualizar/{id}/{nome}', function($id, $nome) {
+    $cat = Categoria::find($id);//findOrFail
+    if(isset($cat)){
+        $cat->nome = $nome;
+        $cat->save();
+        return redirect('/');
     }
-    
+    else {
+        echo "<h1>Categoria não encontrada</h1>";
+    }    
+});
+
+Route::get('/remover/{id}', function($id) {
+    $cat = Categoria::find($id);//findOrFail
+    if(isset($cat)){
+        $cat->delete();
+        return redirect('/');
+    }
+    else {
+        echo "<h1>Categoria não encontrada</h1>";
+    }    
 });
