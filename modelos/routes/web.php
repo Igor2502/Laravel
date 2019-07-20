@@ -116,3 +116,15 @@ Route::get('/somenteapagadas', function () {
             echo '<br>';
     }
 });
+
+Route::get('/restaurar/{id}', function($id) {
+    $cat = Categoria::withTrashed()->find($id);
+    if(isset($cat)){
+        $cat->restore();
+        echo "Categotia Restaurada: " . $cat->id . "<br>";
+        echo "<a href=\"/\">Listar todas</a> ";
+    }
+    else {
+        echo "<h1>Categoria não encontrada</h1>";
+    }    
+});
