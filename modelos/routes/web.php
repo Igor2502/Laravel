@@ -92,3 +92,27 @@ Route::get('/todas', function () {
             echo '<br>';
     }
 });
+
+Route::get('/ver/{id}', function($id) {
+    //$cat = Categoria::withTrashed()->find($id);
+    $cat = Categoria::withTrashed()->where('id', $id)->get()->first();
+    if(isset($cat)){
+        echo "id: " . $cat->id . ", ";
+        echo "Nome: " . $cat->nome . "<br>";
+    }
+    else {
+        echo "<h1>Categoria não encontrada</h1>";
+    }    
+});
+
+Route::get('/somenteapagadas', function () {
+    $categorias = Categoria::onlyTrashed()->get();
+    foreach($categorias as $c){
+        echo "id: " . $c->id . ", ";
+        echo "Nome: " . $c->nome;
+        if($c->trashed())
+            echo ' (apagado) <br>';
+        else
+            echo '<br>';
+    }
+});
