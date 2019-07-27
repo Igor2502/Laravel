@@ -10,6 +10,9 @@
             .navbar {
                 margin-bottom: 20px;
             }
+            body, button {
+                margin-top: 15px;
+            }
         </style>
     </head>
     <body>
