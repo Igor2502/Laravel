@@ -42,10 +42,22 @@
                                 <button type="cancel" class="btn btn-danger btn-sm">Cancelar</button>
                             </form>
                         </div>
+@if($errors->any())
+                        <div class="card-footer">
+    @foreach($errors->all() as $error)
+                            <div class="alert alert-danger" role="alert">
+        {{ $error }}
+                            </div>
+    @endforeach
+                        </div>
+@endif
                     </div>
                 </div>
             </div>
         </main>
+        @if(isset($errors))
+            {{var_dump($errors)}}
+        @endif
         <script src="{{asset('js/app.js')}}" type="text/javascript"></script>
     </body>
 </html>
