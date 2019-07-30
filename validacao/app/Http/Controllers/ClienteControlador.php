@@ -36,12 +36,22 @@ class ClienteControlador extends Controller
      */
     public function store(Request $request)
     {
+        $mensagens = [
+            'required' => 'O atributo :attribute deve ser preenchido',
+            'nome.required' => 'Preenchimento do campo "Nome" obrigatório.',
+            'nome.min' => 'Nome muito curto.',
+            'nome.max' => 'Nome muito longo.',
+            'nome.unique' => 'Nome já cadastrado.',
+            'email.email' => 'Digite um endereço de E-mail válido.'
+
+        ];
         $request->validate([
             'nome' => 'required|min:3|max:20|unique:clientes',
             'idade' => 'required',
             'endereco' => 'required|min:5',
             'email' => 'required|email'
-        ]);
+        ], $mensagens);
+
         $cliente = new Cliente();
         $cliente->nome = $request->input('nome');
         $cliente->idade = $request->input('idade');
